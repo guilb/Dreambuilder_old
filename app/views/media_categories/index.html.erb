@@ -1,0 +1,29 @@
+<h1>Listing media_categories</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Alias</th>
+    <th>Menu label</th>
+    <th>Position</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @media_categories.each do |media_category| %>
+  <tr>
+    <td><%= media_category.title %></td>
+    <td><%= media_category.alias %></td>
+    <td><%= media_category.menu_label %></td>
+    <td><%= media_category.position %></td>
+    <td><%= link_to 'Show', media_category %></td>
+    <td><%= link_to 'Edit', edit_media_category_path(media_category) %></td>
+    <td><%= link_to 'Destroy', media_category, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Media category', new_media_category_path %>

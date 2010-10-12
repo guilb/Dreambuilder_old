@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  alias: MyString
+  menu_label: MyString
+  position: 1
+
+two:
+  title: MyString
+  alias: MyString
+  menu_label: MyString
+  position: 1

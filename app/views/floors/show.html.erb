@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @floor.title %>
+</p>
+
+<p>
+  <b>Alias:</b>
+  <%= @floor.alias %>
+</p>
+
+<p>
+  <b>Menu label:</b>
+  <%= @floor.menu_label %>
+</p>
+
+<p>
+  <b>Plan:</b>
+  <%= @floor.plan %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @floor.position %>
+</p>
+
+<p>
+  <b>Appartements</b>
+  <ul>
+  <%= render :partial => "houses/house",
+             :collection => @floor.houses %>
+  </ul>
+  </p>
+
+
+<%= link_to 'Edit', edit_floor_path(@floor) %> |
+<%= link_to 'Back', floors_path %>

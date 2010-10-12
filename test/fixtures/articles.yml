@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  alias: MyString
+  menu_label: MyString
+  description: MyText
+  params: MyText
+  position: 1
+  article_category_id: 1
+
+two:
+  title: MyString
+  alias: MyString
+  menu_label: MyString
+  description: MyText
+  params: MyText
+  position: 1
+  article_category_id: 1

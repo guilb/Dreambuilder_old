@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @media.title %>
+</p>
+
+<p>
+  <b>Alias:</b>
+  <%= @media.alias %>
+</p>
+
+<p>
+  <b>Menu label:</b>
+  <%= @media.menu_label %>
+</p>
+
+<p>
+  <b>File:</b>
+  <%= @media.file %>
+</p>
+
+<p>
+  <b>Media category:</b>
+  <%= @media.media_category_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_media_path(@media) %> |
+<%= link_to 'Back', medias_path %>

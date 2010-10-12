@@ -1,0 +1,2 @@
+module MediaCategoriesHelper
+end

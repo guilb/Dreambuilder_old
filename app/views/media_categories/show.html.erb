@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @media_category.title %>
+</p>
+
+<p>
+  <b>Alias:</b>
+  <%= @media_category.alias %>
+</p>
+
+<p>
+  <b>Menu label:</b>
+  <%= @media_category.menu_label %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @media_category.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_media_category_path(@media_category) %> |
+<%= link_to 'Back', media_categories_path %>
