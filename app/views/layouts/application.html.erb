@@ -9,14 +9,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <ul>
-    <li><%= link_to "Catégories d'articles", article_categories_path %></li>
-    <li><%= link_to "Articles", articles_path %></li>
-    <li><%= link_to "Catégories de Médias", media_categories_path %></li>
-    <li><%= link_to "Médias", medias_path %></li>
-    <li><%= link_to "Etages", floors_path %></li>
-    <li><%= link_to "Logement", houses_path %></li>
-  </ul>
+
 <%= yield %>
 
 </body>
