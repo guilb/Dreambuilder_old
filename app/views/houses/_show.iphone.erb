@@ -1,0 +1,47 @@
+  <% for house in list_houses %>
+  <div id="house_<%= house.id %>">
+    <div class="toolbar">
+      <a class="back" href="#">Retour</a>
+        <h1><%= house.title %></h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= house.title %>
+</p>
+
+<p>
+  <b>Alias:</b>
+  <%= house.alias %>
+</p>
+
+<p>
+  <b>Menu label:</b>
+  <%= house.menu_label %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= house.description %>
+</p>
+
+<p>
+  <b>Plan:</b>
+  <%= house.plan %>
+</p>
+
+<p>
+  <b>Floor:</b>
+  <%= link_to house.floor.menu_label,house.floor %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= house.position %>
+</p>
+  </div>
+  <% end %>
+
+

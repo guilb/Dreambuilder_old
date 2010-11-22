@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        
+        <title>jQTouch &beta;</title>
+        <style type="text/css" media="screen">@import "../../jqtouch/jqtouch.css";</style>
+        <style type="text/css" media="screen">@import "../../themes/jqt/theme.css";</style>
+        <style type="text/css" media="screen">@import "../../extensions/jqt.photo.css";</style>
+        <script src="../../jqtouch/jquery.1.4.2.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../jqtouch/jqtouch.js" type="application/x-javascript" charset="utf-8"></script>
+        <script src="../../extensions/jqt.photo.js" type="application/x-javascript" charset="utf-8"></script>
+        <script src="../../extensions/jqt.scroll.js" type="application/x-javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            //change dynamic css
+			var jQT = new $.jQTouch({
+                slideSelector: '#jqt li a, .slide',
+				icon: 'jqtouch.png',
+                addGlossToIcon: false,
+                startupScreen: 'jqt_startup.png',
+                statusBar: 'black',
+                preloadImages: [
+                    '../../themes/jqt/img/back_button.png',
+                    '../../themes/jqt/img/back_button_clicked.png',
+                    '../../themes/jqt/img/button_clicked.png',
+                    '../../themes/jqt/img/grayButton.png',
+                    '../../themes/jqt/img/whiteButton.png',
+                    '../../themes/jqt/img/loading.gif'
+                    ]
+            });
+            // Some sample Javascript functions:
+            $(function(){
+                // Show a swipe event on swipe test
+                $('#swipeme').swipe(function(evt, data) {
+                    $(this).html('You swiped <strong>' + data.direction + '/' + data.deltaX +':' + data.deltaY + '</strong>!');
+                    $(this).parent().after('<li>swiped!</li>')
+
+                });
+                $('#tapme').tap(function(){
+                    $(this).parent().after('<li>tapped!</li>')
+                })
+                $('a[target="_blank"]').click(function() {
+                    if (confirm('This link opens in a new window.')) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                // Page animation callback events
+                $('#pageevents').
+                    bind('pageAnimationStart', function(e, info){ 
+                        $(this).find('.info').append('Started animating ' + info.direction + '&hellip; ');
+                    }).
+                    bind('pageAnimationEnd', function(e, info){
+                        $(this).find('.info').append(' finished animating ' + info.direction + '.<br /><br />');
+                    });
+                // Page animations end with AJAX callback event, example 1 (load remote HTML only first time)
+                $('#callback').bind('pageAnimationEnd', function(e, info){
+                    // Make sure the data hasn't already been loaded (we'll set 'loaded' to true a couple lines further down)
+                    if (!$(this).data('loaded')) {
+                        // Append a placeholder in case the remote HTML takes its sweet time making it back
+                        // Then, overwrite the "Loading" placeholder text with the remote HTML
+                        $(this).append($('<div>Loading</div>').load('ajax.html .info', function() {        
+                            // Set the 'loaded' var to true so we know not to reload
+                            // the HTML next time the #callback div animation ends
+                            $(this).parent().data('loaded', true);  
+                        }));
+                    }
+                });
+                // Orientation callback event
+                $('#jqt').bind('turn', function(e, data){
+                    $('#orient').html('Orientation: ' + data.orientation);
+                });
+                $('#play_movie').bind('tap', function(){
+                    $('#movie').get(0).play();
+                    $(this).removeClass('active');
+                });
+                
+                $('#video').bind('pageAnimationStart', function(e, info){
+                    $('#movie').css('display', 'none');
+                }).bind('pageAnimationEnd', function(e, info){
+                    if (info.direction == 'in')
+                    {
+                        $('#movie').css('display', 'block');
+                    }
+                });
+				
+				jQT.generateGallery("photo", [
+											  {
+												  src:"http://www.nasa.gov/images/content/450090main_image_1653_946-710.jpg",
+												  width: 946,
+												  height: 710
+											  },
+											  {src:"/jqtouch/test-image-1.jpg",caption:"A test caption for the generator"},
+											  {src:"http://www.thinkgeek.com/images/products/front/b597_rock_paper_scissors_lizard_spock.jpg"},
+											  {src:"http://rlv.zcache.com/theres_no_place_like_127_0_0_1_tshirt-p235602976566783086tmn7_313.jpg"},
+											  {src:"http://www.thinkgeek.com/images/products/front/lg-capsaicin.jpg"},
+											  {src:"http://imgs.xkcd.com/comics/in_ur_reality.png"},
+											  {src:"http://www.thinkgeek.com/images/products/front/power.jpg"},
+											  {src:"http://imgs.xkcd.com/store/imgs/stand_back_square_0.png"},
+											  {src:"/jqtouch/test-image-4.jpg"},
+											  {src:"http://www.thinkgeek.com/images/products/front/zombie_repellent_crayon.jpg"},
+											  {src:"http://imgs.xkcd.com/store/imgs/sudo_square_0.png"},
+											  {src:"http://ladyzee.files.wordpress.com/2007/06/geek.jpg"},
+											  {src:"http://imgs.xkcd.com/store/imgs/just_shy_square_0.png"},
+											  {src:"/jqtouch/test-image-3.jpg"},
+											  {src:"http://farm5.static.flickr.com/4048/4620214378_da454753f2.jpg"},
+											  {src:"http://www.thinkgeek.com/images/products/front/ac0b_Electronic_Drum_Kit_Shirt.gif"},
+											  {src:"http://imgs.xkcd.com/comics/chess_photo.png"},
+											  {src:"http://farm5.static.flickr.com/4068/4635718507_389ca9b2e7.jpg"},
+											  {src:"http://imgs.xkcd.com/comics/asshole.png"},
+											  {src:"/jqtouch/test-image-2.jpg"},
+											  {src:"http://www.thinkgeek.com/images/products/front/obey-gravity.jpg"},
+											  {src:"http://farm3.static.flickr.com/2556/3833582019_a0c7593e5c.jpg"},
+											  {src:"http://antwrp.gsfc.nasa.gov/apod/image/1005/rheaepimetheus_cassini.jpg"},
+											  {src:"http://www.yeshua-do.com/jom/images/stories/einstein_tongue.jpg"},
+											  {src:"http://fc07.deviantart.net/fs71/f/2010/155/a/6/a63f0de1d27516832f2ce1474efc6be4.png"},
+											  {src:"http://fc07.deviantart.net/fs71/i/2010/154/8/5/sun_shower_by_jyoujo.jpg"},
+											  {src:"http://grin.hq.nasa.gov/IMAGES/MEDIUM/GPN-2000-000762.jpg"},
+											  {src:"http://i572.photobucket.com/albums/ss167/derekabril/einstein_010.png"},
+											  {src:"http://grin.hq.nasa.gov/IMAGES/MEDIUM/GPN-2000-000058.jpg"},
+											  {src:"http://fc05.deviantart.net/fs71/i/2010/153/5/f/tR_Minimal_Concept_by_kAtz93.png"},
+											  {src:"http://grin.hq.nasa.gov/IMAGES/MEDIUM/GPN-2000-000439.jpg"},
+											  {src:"http://antwrp.gsfc.nasa.gov/apod/image/1005/ic443_franke900.jpg"},
+											  {src:"/jqtouch/test-image-1.jpg",caption:"A test caption for the generator"},
+											  {src:"http://www.thinkgeek.com/images/products/front/b597_rock_paper_scissors_lizard_spock.jpg?2"},
+											  {src:"http://rlv.zcache.com/theres_no_place_like_127_0_0_1_tshirt-p235602976566783086tmn7_313.jpg?2"},
+											  {src:"http://www.thinkgeek.com/images/products/front/lg-capsaicin.jpg?2"},
+											  {src:"http://imgs.xkcd.com/comics/in_ur_reality.png?2"},
+											  {src:"http://www.thinkgeek.com/images/products/front/power.jpg?2"},
+											  {src:"http://imgs.xkcd.com/store/imgs/stand_back_square_0.png?2"},
+											  {src:"/jqtouch/test-image-4.jpg?2"},
+											  {src:"http://www.thinkgeek.com/images/products/front/zombie_repellent_crayon.jpg?2"},
+											  {src:"http://imgs.xkcd.com/store/imgs/sudo_square_0.png?2"},
+											  {src:"http://ladyzee.files.wordpress.com/2007/06/geek.jpg?2"},
+											  {src:"http://imgs.xkcd.com/store/imgs/just_shy_square_0.png?2"},
+											  {src:"/jqtouch/test-image-3.jpg?2"},
+											  {src:"http://farm5.static.flickr.com/4048/4620214378_da454753f2.jpg?2"},
+											  {src:"http://www.thinkgeek.com/images/products/front/ac0b_Electronic_Drum_Kit_Shirt.gif?2"},
+											  {src:"http://imgs.xkcd.com/comics/chess_photo.png?2"},
+											  {src:"http://farm5.static.flickr.com/4068/4635718507_389ca9b2e7.jpg?2"},
+											  {src:"http://imgs.xkcd.com/comics/asshole.png?2"},
+											  {src:"/jqtouch/test-image-2.jpg?2"},
+											  {src:"http://www.thinkgeek.com/images/products/front/obey-gravity.jpg?2"},
+											  {src:"http://farm3.static.flickr.com/2556/3833582019_a0c7593e5c.jpg?2"},
+											  {src:"http://antwrp.gsfc.nasa.gov/apod/image/1005/rheaepimetheus_cassini.jpg?2"},
+											  {src:"http://www.yeshua-do.com/jom/images/stories/einstein_tongue.jpg?2"},
+											  {src:"http://fc07.deviantart.net/fs71/f/2010/155/a/6/a63f0de1d27516832f2ce1474efc6be4.png?2"},
+											  {src:"http://fc07.deviantart.net/fs71/i/2010/154/8/5/sun_shower_by_jyoujo.jpg?2"},
+											  {src:"http://grin.hq.nasa.gov/IMAGES/MEDIUM/GPN-2000-000762.jpg?2"},
+											  {src:"http://i572.photobucket.com/albums/ss167/derekabril/einstein_010.png?2"},
+											  {src:"http://grin.hq.nasa.gov/IMAGES/MEDIUM/GPN-2000-000058.jpg?2"},
+											  {src:"http://fc05.deviantart.net/fs71/i/2010/153/5/f/tR_Minimal_Concept_by_kAtz93.png?2"},
+											  {src:"http://grin.hq.nasa.gov/IMAGES/MEDIUM/GPN-2000-000439.jpg?2"},
+											  {src:"http://antwrp.gsfc.nasa.gov/apod/image/1005/ic443_franke900.jpg?2"},
+											 ],
+									{defaultIndex:5});
+				jQT.generateGallery("photo2",[
+											  {src:"http://www.nasa.gov/images/content/450090main_image_1653_946-710.jpg"},
+											  {src:"/jqtouch/test-image-1.jpg",caption:"Test Image 1"},
+											  {src:"/jqtouch/test-image-2.jpg",caption:"Test Image 2"},
+											  {src:"http://rlv.zcache.com/css_is_awesome_mug-p1687164350719819282objs_210.jpg",caption:"CSS is Awesome"},
+											  {src:"/jqtouch/test-image-4.jpg"}
+											 ]);
+            });
+        </script>
+        <style type="text/css" media="screen">
+            body{padding-bottom:44px;}
+			#jqt.fullscreen #home .info {
+                display: none;
+            }
+            div#jqt #about {
+                padding: 100px 10px 40px;
+                text-shadow: rgba(255, 255, 255, 0.3) 0px -1px 0;
+                font-size: 13px;
+                text-align: center;
+                background: #161618;
+            }
+            div#jqt #about p {
+                margin-bottom: 8px;
+            }
+            div#jqt #about a {
+                color: #fff;
+                font-weight: bold;
+                text-decoration: none;
+            }
+			.slide-container,.scroll-container{text-align:center;/*outline:2px solid red;*/}
+			.slide-container > img,.scroll-container > img{vertical-align:middle;}
+        </style>
+    </head>
+    <body>
+        <div id="jqt">
+            
+            <div id="home" class="current">
+                <div class="toolbar">
+                    <h1>jQTouch</h1>
+                    <a class="button slideup" id="infoButton" href="#about">About</a>
+                </div>
+                <div class="vertical-scroll">
+                    <div class="with-scrollbar">
+                        <ul class="rounded">
+                            <li class="arrow"><a href="#photo">Photo Gallery</a> <small class="counter">63</small></li>
+                            <li class="arrow"><a href="#photo2">Photo Gallery 2</a> <small class="counter">5</small></li>
+                            <li class="arrow"><a href="javascript:jQT.goToSlide('#photo',15)">Jump to a slide</a> <small class="counter">63</small></li>
+                            <li class="arrow"><a href="#horizontal-scrolling-example">Horizontal Scroll</a></li>
+                            <li class="arrow"><a href="#horizontal-slide-example">Horizontal Slide</a></li>
+                            <li class="arrow"><a href="#edge">Fixed Bottom Toolbar</a> <small class="counter">4</small></li>
+                        </ul>
+                        <h2>jQTouch (for expanding space)</h2>
+                        <ul>
+                            <li class="arrow"><a href="#animations">Animations</a> <small class="counter">8</small></li>
+                            <li class="arrow"><a href="#ajax">AJAX</a> <small class="counter">3</small></li>
+                            <li class="arrow"><a href="#callbacks">Events</a> <small class="counter">3</small></li>
+                            <li class="arrow"><a href="#extensions">Extensions</a> <small class="counter">4</small></li>
+                            <li class="arrow"><a href="#video">Video</a></li>
+                            <li class="arrow"><a href="#demos">Demos</a> <small class="counter">2</small></li>
+                        </ul>
+                        <h2>External Links</h2>
+                        <ul class="rounded">
+                            <li class="forward"><a href="http://www.jqtouch.com/" target="_blank">Homepage</a></li>
+                            <li class="forward"><a href="http://www.twitter.com/jqtouch" target="_blank">Twitter</a></li>
+                            <li class="forward"><a href="http://code.google.com/p/jqtouch/w/list" target="_blank">Google Code</a></li>
+                        </ul>
+                        <ul class="individual">
+                            <li><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#107;&#064;&#109;&#111;&#114;&#102;&#117;&#110;&#107;&#046;&#099;&#111;&#109;">Email</a></li>
+                            <li><a href="http://tinyurl.com/support-jqt" target="_blank">Donate</a></li>
+                        </ul>
+                        <div class="info">
+                            <p>Add this page to your home screen to view the custom icon, startup screen, and full screen mode.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+     
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10567445-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

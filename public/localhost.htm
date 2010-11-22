@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8" />
+
+<head>
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<script src="file:///C:/projets/dreambuilder/public/javascripts/iphone/jquery.js" type="text/javascript"></script>
+<script src="file:///C:/projets/dreambuilder/public/javascripts/iphone/jqtouch.js" type="text/javascript"></script>
+<script src="file:///C:/projets/dreambuilder/public/javascripts/iphone/jqtouch.transitions.js" type="text/javascript"></script>
+<script src="file:///C:/projets/dreambuilder/public/javascripts/iphone/thickbox.js" type="text/javascript"></script>
+<link href="file:///C:/projets/dreambuilder/public/stylesheets/iphone/thickbox.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="file:///C:/projets/dreambuilder/public/stylesheets/iphone/theme.jqt.min.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="file:///C:/projets/dreambuilder/public/stylesheets/iphone/jqtouch.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <title>Dreambuilder</title>
+  <meta name="keywords" content="Dreambuilder, Neoweb, Stereograph" />
+  <meta name="description" content="Rever le reel" />
+        <script type="text/javascript" charset="utf-8">
+            var jQT = new $.jQTouch({
+                icon: 'images/iphone/icone.png',
+                addGlossToIcon: false,
+                startupScreen: 'images/iphone/startup.png',
+                statusBar: 'black',
+                preloadImages: [
+                    'images/iphone/themes/jqt/img/back_button.png',
+                    'images/iphone/themes/jqt/img/back_button_clicked.png',
+                    'images/iphone/themes/jqt/img/button_clicked.png',
+                    'images/iphone/themes/jqt/img/grayButton.png',
+                    'images/iphone/themes/jqt/img/whiteButton.png',
+                    'images/iphone/themes/jqt/img/loading.gif'
+                    ]
+            });
+            // Some sample Javascript functions:
+            $(function(){
+                // Show a swipe event on swipe test
+                $('#swipeme').swipe(function(evt, data) {
+                    $(this).html('You swiped <strong>' + data.direction + '</strong>!');
+                });
+                $('a[target="_blank"]').click(function() {
+                    if (confirm('This link opens in a new window.')) {
+                        return true;
+                    } else {
+                        $(this).removeClass('active');
+                        return false;
+                    }
+                });
+                // Page animation callback events
+                $('#pageevents').
+                    bind('pageAnimationStart', function(e, info){
+                        $(this).find('.info').append('Started animating ' + info.direction + '&hellip; ');
+                    }).
+                    bind('pageAnimationEnd', function(e, info){
+                        $(this).find('.info').append(' finished animating ' + info.direction + '.<br /><br />');
+                    });
+                // Page animations end with AJAX callback event, example 1 (load remote HTML only first time)
+                $('#callback').bind('pageAnimationEnd', function(e, info){
+                    if (!$(this).data('loaded')) {                      // Make sure the data hasn't already been loaded (we'll set 'loaded' to true a couple lines further down)
+                        $(this).append($('<div>Loading</div>').         // Append a placeholder in case the remote HTML takes its sweet time making it back
+                            load('ajax.html .info', function() {        // Overwrite the "Loading" placeholder text with the remote HTML
+                                $(this).parent().data('loaded', true);  // Set the 'loaded' var to true so we know not to re-load the HTML next time the #callback div animation ends
+                            }));
+                    }
+                });
+                // Orientation callback event
+                $('body').bind('turn', function(e, data){
+                    $('#orient').html('Orientation: ' + data.orientation);
+                });
+            });
+        </script>
+        <style type="text/css" media="screen">
+            body.fullscreen #home .info {
+                display: none;
+            }
+            #about {
+                padding: 100px 10px 40px;
+                text-shadow: rgba(255, 255, 255, 0.3) 0px -1px 0;
+                font-size: 13px;
+                text-align: center;
+                background: #161618;
+            }
+            #about p {
+                margin-bottom: 8px;
+            }
+            #about a {
+                color: #fff;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        </style>
+
+</head>
+    <body>
+
+        <!-- Page d'accueil -->
+
+<div id="home" class="current">
+  <div class="toolbar">
+    <h1>Dreambuilder</h1>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+  </div>
+  <!--<h2>Lists</h2>-->
+  <ul class="rounded">
+    <li class="arrow"><a href="/article_categories">Catégories d'articles</a></li>
+    <li class="arrow"><a href="/articles">Articles</a></li>
+    <li class="arrow"><a href="/media_categories">Catégories de Médias</a></li>
+    <li class="arrow"><a href="#medias">Médias</a></li>
+    <li class="arrow"><a href="#floors">Etages</a></li>
+    <li class="arrow"><a href="#houses">Logemenst</a></li>
+  </ul>
+</div>
+
+<!-- Les étages-->
+
+
+<div id="floors">
+  <div class="toolbar">
+    <a class="back" href="#">Home</a>
+    <h1>Les Etages</h1>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+  </div>
+  <ul class="rounded">
+   <li class="arrow"><a href="#floor_2">deux' ièMe</a></li>
+   <li class="arrow"><a href="#floor_1">premier</a></li>
+  </ul>
+</div>
+
+
+  <div id="floor_2">
+    <div class="toolbar">
+      <a class="back" href="#">Home</a>
+        <h1>deux' ièMe</h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <ul class="rounded">
+        <li class="arrow"><a href="#house_3">Appart JBC</a></li>
+        <li class="arrow"><a href="#house_4">Appart CRO</a></li>
+    </ul>
+  </div>
+  <div id="floor_1">
+    <div class="toolbar">
+      <a class="back" href="#">Home</a>
+        <h1>premier</h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <ul class="rounded">
+        <li class="arrow"><a href="#house_1">Appart FGU</a></li>
+        <li class="arrow"><a href="#house_2">Appart FLA</a></li>
+    </ul>
+  </div>
+
+  <div id="house_4">
+    <div class="toolbar">
+      <a class="back" href="#">Retour</a>
+        <h1>Appart CRO</h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <p id="notice"></p>
+
+<p>
+  <b>Title:</b>
+  Appart CRO
+</p>
+
+<p>
+  <b>Alias:</b>
+  Appart CRO
+</p>
+
+<p>
+  <b>Menu label:</b>
+  Appart CRO
+</p>
+
+<p>
+  <b>Description:</b>
+  
+</p>
+
+<p>
+  <b>Plan:</b>
+  
+</p>
+
+<p>
+  <b>Floor:</b>
+  <a href="/floors/2-deux-i-me">deuxièMe</a>
+</p>
+
+<p>
+  <b>Position:</b>
+  4
+</p>
+  </div>
+  <div id="house_3">
+    <div class="toolbar">
+      <a class="back" href="#">Retour</a>
+        <h1>Appart JBC</h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <p id="notice"></p>
+
+<p>
+  <b>Title:</b>
+  Appart JBC
+</p>
+
+<p>
+  <b>Alias:</b>
+  Appart JBC
+</p>
+
+<p>
+  <b>Menu label:</b>
+  Appart JBC
+</p>
+
+<p>
+  <b>Description:</b>
+  
+</p>
+
+<p>
+  <b>Plan:</b>
+  
+</p>
+
+<p>
+  <b>Floor:</b>
+  <a href="/floors/2-deux-i-me">deuxièMe</a>
+</p>
+
+<p>
+  <b>Position:</b>
+  3
+</p>
+  </div>
+  <div id="house_2">
+    <div class="toolbar">
+      <a class="back" href="#">Retour</a>
+        <h1>Appart FLA</h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <p id="notice"></p>
+
+<p>
+  <b>Title:</b>
+  Appart FLA
+</p>
+
+<p>
+  <b>Alias:</b>
+  Appart FLA
+</p>
+
+<p>
+  <b>Menu label:</b>
+  Appart FLA
+</p>
+
+<p>
+  <b>Description:</b>
+  
+</p>
+
+<p>
+  <b>Plan:</b>
+  
+</p>
+
+<p>
+  <b>Floor:</b>
+  <a href="/floors/1-premier">premier</a>
+</p>
+
+<p>
+  <b>Position:</b>
+  
+</p>
+  </div>
+  <div id="house_1">
+    <div class="toolbar">
+      <a class="back" href="#">Retour</a>
+        <h1>Appart FGU</h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <p id="notice"></p>
+
+<p>
+  <b>Title:</b>
+  Appart FGU
+</p>
+
+<p>
+  <b>Alias:</b>
+  Appart FGU
+</p>
+
+<p>
+  <b>Menu label:</b>
+  Appart FGU
+</p>
+
+<p>
+  <b>Description:</b>
+  
+</p>
+
+<p>
+  <b>Plan:</b>
+  
+</p>
+
+<p>
+  <b>Floor:</b>
+  <a href="/floors/1-premier">premier</a>
+</p>
+
+<p>
+  <b>Position:</b>
+  1
+</p>
+  </div>
+
+
+
+<div id="medias">
+  <div class="toolbar">
+    <a class="back" href="#">Home</a>
+    <h1>Les Médias</h1>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+  </div>
+  <ul class="rounded">
+      <li class="arrow">MP4<a href="images/medias/test.mp4">test.mp4</a></li>
+      <li class="arrow">M4V<a href="images/medias/test.m4v">test.m4v</a></li>
+      <li class="arrow">MOV<a href="images/medias/test.mov">video_mov</a></li>
+      <li class="arrow">JPG<a href="images/medias/image2.jpg">Image2</a></li>
+      <li class="arrow">JPG<a href="images/medias/image1.jpg">1ère image</a></li>
+  </ul>
+<a href="images/medias/image1.jpg" title="add a caption to title attribute / or leave blank" class="thickbox" rel="gallery-plants">a</a><br />
+<a href="images/plant2.jpg" title="add a caption to title attribute / or leave blank" class="thickbox" rel="gallery-plants">b</a><br />
+<a href="images/plant3.jpg" title="add a caption to title attribute / or leave blank" class="thickbox" rel="gallery-plants">c</a><br />
+<a href="images/plant4.jpg" title="add a caption to title attribute / or leave blank" class="thickbox" rel="gallery-plants">d</a><br />
+
+
+</div>
+
+
+
+<!-- les apparts -->
+
+<div id="houses">
+  <div class="toolbar">
+    <a class="back" href="#">Home</a>
+    <h1>Les Appartements</h1>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+  </div>
+  <ul class="rounded">
+   <li class="arrow"><a href="#house_4">Appart CRO</a></li>
+   <li class="arrow"><a href="#house_3">Appart JBC</a></li>
+   <li class="arrow"><a href="#house_2">Appart FLA</a></li>
+   <li class="arrow"><a href="#house_1">Appart FGU</a></li>
+  </ul>
+</div>
+
+
+
+
+
+    </body>
+
+
+</html>

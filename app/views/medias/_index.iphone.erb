@@ -1,0 +1,47 @@
+<script>
+  $(function(){
+  jQT.generateGallery("images",[
+  <% for media in list_medias %>
+    <% if media[:extension]=="jpg" %>
+  {src:"<%= ["images/medias/",media.file].join('') %>"},
+    <% end %>
+  <% end %>
+  {src:"http://www.nasa.gov/images/content/450090main_image_1653_946-710.jpg"},
+  {src:"http://rlv.zcache.com/css_is_awesome_mug-p1687164350719819282objs_210.jpg",caption:"CSS is Awesome"}
+  ]);
+  });
+</script>
+
+<div id="medias">
+  <div class="toolbar">
+    <a class="back" href="#">Home</a>
+    <h1>Les Médias</h1>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+  </div>
+
+  <% for media in list_medias %>
+    <% if media[:extension]=="jpg" %>
+      
+    <% elsif media[:extension]=="mov" %>
+      MOV<%= link_to media.title, ["http://localhost:3000/images/medias/",media.file].join('') %><br />
+    <% elsif media[:extension]=="mp4" %>
+      MP4<%= link_to media.title, ["images/medias/",media.file].join('') %><br />
+    <% elsif media[:extension]=="m4v" %>
+      M4V<%= link_to media.title, ["images/medias/",media.file].join('') %><br />
+    <% elsif media[:extension]=="swf" %>
+      SWF<%= link_to media.title, ["images/medias/",media.file].join('') %><br />
+    <% else %>
+      Extension inconnue<br />
+    <% end %>
+  <% end %>
+  <% i=0 %>
+  <% for media in list_medias %>
+    <% if media[:extension]=="jpg" %>
+      <% i += 1 %>
+      <%= link_to media.title, ["javascript:jQT.goToSlide('#images',",i,")"].join('') %><br />
+    <% end %>
+  <% end %>
+
+</div>
+
+

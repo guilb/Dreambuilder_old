@@ -1,0 +1,14 @@
+<% for floor in list_floors %>
+  <div id="floor_<%= floor.id %>">
+    <div class="toolbar">
+      <a class="back" href="#">Home</a>
+        <h1><%= floor.title %></h1>
+      <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+    </div>
+    <ul class="rounded">
+      <% for house in list_floor_houses(floor) %>
+        <li class="arrow"><%= link_to house.title, [ "#house_", house.id ].join %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

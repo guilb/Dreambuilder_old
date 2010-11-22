@@ -1,0 +1,12 @@
+<div id="houses">
+  <div class="toolbar">
+    <a class="back" href="#">Home</a>
+    <h1>Les Appartements</h1>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
+  </div>
+  <ul class="rounded">
+  <% for house in list_houses %>
+   <li class="arrow"><%= link_to house.title, [ "#house_", house.id ].join %></li>
+  <% end %>
+  </ul>
+</div>
