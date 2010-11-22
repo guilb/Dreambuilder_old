@@ -6,24 +6,18 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<%= stylesheet_link_tag "iphone/jqtouch" %>
+<%= stylesheet_link_tag "iphone/theme" %>
+
 <%= javascript_include_tag "iphone/jquery" %>
 <%= javascript_include_tag "iphone/jqtouch" %>
 <%= javascript_include_tag "iphone/jqtouch.transitions" %>
-<%= javascript_include_tag "iphone/jqt.photo" %>
-<%= javascript_include_tag "iphone/jqt.scroll" %>
-<%= javascript_include_tag "iphone/jquery.fancybox-1.3.1.pack" %>
-<%= stylesheet_link_tag "iphone/jquery.fancybox-1.3.1" %>
-<%= stylesheet_link_tag "iphone/jqtouch" %>
-<%= stylesheet_link_tag "iphone/theme" %>
-<%= stylesheet_link_tag "iphone/jqt.photo" %>
   <title><%= @meta_title %></title>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
-        <script type="text/javascript" charset="utf-8">
-            //change dynamic css
+           <script type="text/javascript" charset="utf-8">
             var jQT = new $.jQTouch({
-                slideSelector: '#jqt li a, .slide',
-				icon: 'jqtouch.png',
+                icon: 'jqtouch.png',
                 addGlossToIcon: false,
                 startupScreen: 'jqt_startup.png',
                 statusBar: 'black',
@@ -36,22 +30,17 @@
                     '../../themes/jqt/img/loading.gif'
                     ]
             });
-
             // Some sample Javascript functions:
-           $(function(){
+            $(function(){
                 // Show a swipe event on swipe test
                 $('#swipeme').swipe(function(evt, data) {
-                    $(this).html('You swiped <strong>' + data.direction + '/' + data.deltaX +':' + data.deltaY + '</strong>!');
-                    $(this).parent().after('<li>swiped!</li>')
-
+                    $(this).html('You swiped <strong>' + data.direction + '</strong>!');
                 });
-                $('#tapme').tap(function(){
-                    $(this).parent().after('<li>tapped!</li>')
-                })
                 $('a[target="_blank"]').click(function() {
                     if (confirm('This link opens in a new window.')) {
                         return true;
                     } else {
+                        $(this).removeClass('active');
                         return false;
                     }
                 });
@@ -65,73 +54,44 @@
                     });
                 // Page animations end with AJAX callback event, example 1 (load remote HTML only first time)
                 $('#callback').bind('pageAnimationEnd', function(e, info){
-                    // Make sure the data hasn't already been loaded (we'll set 'loaded' to true a couple lines further down)
-                    if (!$(this).data('loaded')) {
-                        // Append a placeholder in case the remote HTML takes its sweet time making it back
-                        // Then, overwrite the "Loading" placeholder text with the remote HTML
-                        $(this).append($('<div>Loading</div>').load('ajax.html .info', function() {
-                            // Set the 'loaded' var to true so we know not to reload
-                            // the HTML next time the #callback div animation ends
-                            $(this).parent().data('loaded', true);
-                        }));
+                    if (!$(this).data('loaded')) {                      // Make sure the data hasn't already been loaded (we'll set 'loaded' to true a couple lines further down)
+                        $(this).append($('<div>Loading</div>').         // Append a placeholder in case the remote HTML takes its sweet time making it back
+                            load('ajax.html .info', function() {        // Overwrite the "Loading" placeholder text with the remote HTML
+                                $(this).parent().data('loaded', true);  // Set the 'loaded' var to true so we know not to re-load the HTML next time the #callback div animation ends
+                            }));
                     }
                 });
                 // Orientation callback event
-                $('#jqt').bind('turn', function(e, data){
+                $('body').bind('turn', function(e, data){
                     $('#orient').html('Orientation: ' + data.orientation);
                 });
-                $('#play_movie').bind('tap', function(){
-                    $('#movie').get(0).play();
-                    $(this).removeClass('active');
-                });
-
-                $('#video').bind('pageAnimationStart', function(e, info){
-                    $('#movie').css('display', 'none');
-                }).bind('pageAnimationEnd', function(e, info){
-                    if (info.direction == 'in')
-                    {
-                        $('#movie').css('display', 'block');
-                    }
-                });
-
-jQT.generateGallery("photo2",[
-											  {src:"http://www.nasa.gov/images/content/450090main_image_1653_946-710.jpg"},
-											  {src:"http://rlv.zcache.com/css_is_awesome_mug-p1687164350719819282objs_210.jpg",caption:"CSS is Awesome"}
-											 ]);
-
-
             });
         </script>
         <style type="text/css" media="screen">
-            body{padding-bottom:44px;}
-			#jqt.fullscreen #home .info {
+            body.fullscreen #home .info {
                 display: none;
             }
-            div#jqt #about {
+            #about {
                 padding: 100px 10px 40px;
                 text-shadow: rgba(255, 255, 255, 0.3) 0px -1px 0;
                 font-size: 13px;
                 text-align: center;
                 background: #161618;
             }
-            div#jqt #about p {
+            #about p {
                 margin-bottom: 8px;
             }
-            div#jqt #about a {
+            #about a {
                 color: #fff;
                 font-weight: bold;
                 text-decoration: none;
             }
-			.slide-container,.scroll-container{text-align:center;/*outline:2px solid red;*/}
-			.slide-container > img,.scroll-container > img{vertical-align:middle;}
-        </style>
+        </style> 
 
 
 </head>
     <body>
-      <div id="jqt">
         <%= yield %>
-      </div>
     </body>
 
 

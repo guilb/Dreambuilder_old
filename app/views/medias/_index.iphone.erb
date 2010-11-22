@@ -1,16 +1,4 @@
-<script>
-  $(function(){
-  jQT.generateGallery("images",[
-  <% for media in list_medias %>
-    <% if media[:extension]=="jpg" %>
-  {src:"<%= ["images/medias/",media.file].join('') %>"},
-    <% end %>
-  <% end %>
-  {src:"http://www.nasa.gov/images/content/450090main_image_1653_946-710.jpg"},
-  {src:"http://rlv.zcache.com/css_is_awesome_mug-p1687164350719819282objs_210.jpg",caption:"CSS is Awesome"}
-  ]);
-  });
-</script>
+
 
 <div id="medias">
   <div class="toolbar">
