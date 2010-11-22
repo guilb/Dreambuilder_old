@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # this method uses a regular expression to match the text
   # that would describe the browser used by the client
   def is_iphone_request?
-    request.user_agent =~ /(Mobile\/.+Safari)/
+    request.user_agent !=~ /(Mobile\/.+Safari)/
     #request.user_agent =~ /(AppleWebKit\/.+AdobeAIR)/
   end
 

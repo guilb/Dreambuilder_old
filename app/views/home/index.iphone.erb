@@ -1,19 +1,34 @@
+<!-- Page d'accueil -->
+
 <div id="home" class="current">
   <div class="toolbar">
     <h1>Dreambuilder</h1>
-    <a class="button slideup" id="infoButton" href="#about">A propos</a>
+    <a class="button slideup" id="infoButton" href="#contact">Contact</a>
   </div>
   <!--<h2>Lists</h2>-->
   <ul class="rounded">
     <li class="arrow"><%= link_to "Catégories d'articles", article_categories_path %></li>
     <li class="arrow"><%= link_to "Articles", articles_path %></li>
     <li class="arrow"><%= link_to "Catégories de Médias", media_categories_path %></li>
-    <li class="arrow"><%= link_to "Médias", medias_path %></li>
-    <li class="arrow"><%= link_to "Etages", floors_path %></li>
-    <li class="arrow"><%= link_to "Logement", houses_path %></li>
-  </ul>
-  <ul class="rounded">
-    <li class="arrow">Contact</li>
+    <li class="arrow"><%= link_to "Médias", "#medias" %></li>
+    <li class="arrow"><%= link_to "Etages", "#floors" %></li>
+    <li class="arrow"><%= link_to "Logemenst", "#houses" %></li>
+    <li class="arrow"><a href="#photo2">Photo Gallery 2</a> <small class="counter">5</small></li>
+
   </ul>
 </div>
+
+<% # = render :partial => "contacts/new", :controller =>"contact", :action =>"new"%>
+<!-- Les étages-->
+
+
+<%= render :partial => "floors/index"%>
+<%= render :partial => "houses/floor_index"%>
+<%= render :partial => "houses/show"%>
+<%= render :partial => "medias/index"%>
+<!-- les apparts -->
+
+<%= render :partial => "houses/index"%>
+
+
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101008134719) do
+ActiveRecord::Schema.define(:version => 20101014140237) do
 
   create_table "article_categories", :force => true do |t|
     t.string   "title"
@@ -29,6 +29,24 @@ ActiveRecord::Schema.define(:version => 20101008134719) do
     t.text     "params"
     t.integer  "position"
     t.integer  "article_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "salutation"
+    t.string   "name"
+    t.string   "lastname"
+    t.string   "company"
+    t.string   "country"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "gsm"
+    t.string   "fax"
+    t.string   "subject"
+    t.text     "message"
+    t.boolean  "callmeback"
+    t.boolean  "appointment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,7 @@
 Dreambuilder::Application.routes.draw do
  
+  resources :contacts
+
   resources :houses
 
   resources :medias
