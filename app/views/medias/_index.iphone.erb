@@ -1,4 +1,16 @@
-
+<script>
+  $(function(){
+  jQT.generateGallery("images",[
+  <% for media in list_medias %>
+    <% if media[:extension]=="jpg" %>
+  {src:"<%= ["images/medias/",media.file].join('') %>"},
+    <% end %>
+  <% end %>
+  {src:"http://www.nasa.gov/images/content/450090main_image_1653_946-710.jpg"},
+  {src:"http://rlv.zcache.com/css_is_awesome_mug-p1687164350719819282objs_210.jpg",caption:"CSS is Awesome"}
+  ]);
+  });
+</script>
 
 <div id="medias">
   <div class="toolbar">
@@ -9,7 +21,7 @@
 
   <% for media in list_medias %>
     <% if media[:extension]=="jpg" %>
-      
+
     <% elsif media[:extension]=="mov" %>
       MOV<%= link_to media.title, ["http://localhost:3000/images/medias/",media.file].join('') %><br />
     <% elsif media[:extension]=="mp4" %>
@@ -31,5 +43,13 @@
   <% end %>
 
 </div>
+            <div id="video">
+                <div class="toolbar">
+                    <h1>Video</h1>
 
+                    <a class="back" href="#">Home</a>
+                </div>
+                <video id="movie" src="http://localhost:3000/images/medias/test.mov" poster="http://localhost:3000/images/medias/poster.jpg" width="320" height="426" controls></video>
 
+                <a href="#" style="margin: 10px;" id="play_movie" class="whiteButton">Play Movie</a>
+            </div>
